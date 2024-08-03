@@ -9,7 +9,7 @@ class Person(db.Model):
     name = Column(String(50), nullable=False)
     email = Column(String(50), unique=True, nullable=False)
 
-    vehicles = relationship('Vehicle', back_populates='person')
+    vehicles = relationship('Vehicle', back_populates='person', cascade="all, delete-orphan")
 
     def __init__(self, name, email):
         self.name = name

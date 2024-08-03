@@ -12,7 +12,7 @@ class Vehicle(db.Model):
     person_id = Column(Integer, ForeignKey('person.id'), nullable=False)
 
     person = relationship('Person', back_populates='vehicles')
-    violations = relationship('Violation', back_populates='vehicle')
+    violations = relationship('Violation', back_populates='vehicle', cascade="all, delete-orphan")
 
     def __init__(self, license_plate, brand, color, person_id):
         self.license_plate = license_plate
