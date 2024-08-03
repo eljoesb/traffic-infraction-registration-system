@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: traffic_violations_db
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  app:
+    build: .
+    depends_on:
+      - db
+    environment:
+      FLASK_APP: interfaces/api_interface.py
+      DATABASE_URI: postgresql://user:password@db:5432/traffic_violations_db
+      PYTHONPATH: "/app"
+    ports:
+      - "5001:5000"
+    command: flask run --host=0.0.0.0
+
+volumes:
+  postgres_data:
