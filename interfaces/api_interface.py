@@ -10,10 +10,10 @@ init_db(app)
 app.config['DEBUG'] = True
 
 # Register blueprints for controllers
-app.register_blueprint(violation_bp)
-app.register_blueprint(person_bp)
-app.register_blueprint(vehicle_bp)
-app.register_blueprint(officer_bp)
+app.register_blueprint(person_bp, url_prefix='/api')
+app.register_blueprint(vehicle_bp, url_prefix='/api')
+app.register_blueprint(officer_bp, url_prefix='/api')
+app.register_blueprint(violation_bp, url_prefix='/api')
 
 if __name__ == '__main__':
     app.run(debug=True)
