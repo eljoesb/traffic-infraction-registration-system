@@ -11,11 +11,15 @@ officer_repository = SQLAlchemyOfficerRepository(db.session)
 
 @officer_bp.route('/officer', methods=['POST'])
 def add_officer():
-    logging.info("Adding officer")
-    data = request.get_json()
-    officer = Officer(name=data['name'], unique_id=data['unique_id'])
-    officer_repository.add(officer)
-    return jsonify({"message": "Officer added successfully"}), 201
+    try:
+        logging.info("Adding officer")
+        data = request.get_json()
+        officer = Officer(name=data['name'], unique_id=data['unique_id'])
+        officer_repository.add(officer)
+        return jsonify({"message": "Officer added successfully"}), 201
+    except Exception as e:
+        logging.error(f"Error: {e}")
+        return jsonify({"error": "Error adding officer"}), 500
 
 @officer_bp.route('/officer', methods=['GET'])
 def get_officer():

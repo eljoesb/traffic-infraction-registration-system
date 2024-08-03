@@ -11,10 +11,14 @@ person_repository = SQLAlchemyPersonRepository(db.session)
 
 @person_bp.route('/person', methods=['POST'])
 def add_person():
-    data = request.get_json()
-    person = Person(name=data['name'], email=data['email'])
-    person_repository.add(person)
-    return jsonify({"message": "Person added successfully"}), 201
+    try:
+        data = request.get_json()
+        person = Person(name=data['name'], email=data['email'])
+        person_repository.add(person)
+        return jsonify({"message": "Person added successfully"}), 201
+    except Exception as e:
+        logging.error(f"Error: {e}")
+        return jsonify({"error": "Error adding person"}), 500
 
 @person_bp.route('/person', methods=['GET'])
 def get_person():
