@@ -13,7 +13,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   app:
-    build: .
+    image: codejonville/traffic-infraction-registration-system-api:latest
     depends_on:
       - db
     environment:
@@ -21,11 +21,11 @@ services:
       DATABASE_URI: postgresql://user:password@db:5432/traffic_violations_db
       PYTHONPATH: "/app"
     ports:
-      - "5000:5000"
+      - "5001:5000"
     command: flask run --host=0.0.0.0
 
   admin:
-    build: .
+    image: codejonville/traffic-infraction-registration-system-admin:latest
     depends_on:
       - db
     environment:
@@ -33,7 +33,7 @@ services:
       DATABASE_URI: postgresql://user:password@db:5432/traffic_violations_db
       PYTHONPATH: "/app"
     ports:
-      - "5001:5000"
+      - "5002:5000"
     command: flask run --host=0.0.0.0
 
 volumes:
