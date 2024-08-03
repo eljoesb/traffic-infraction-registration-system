@@ -21,7 +21,7 @@ services:
       DATABASE_URI: postgresql://user:password@db:5432/traffic_violations_db
       PYTHONPATH: "/app"
     ports:
-      - "5001:5000"
+      - "5000:5000"
     command: flask run --host=0.0.0.0
 
   admin:
@@ -33,7 +33,7 @@ services:
       DATABASE_URI: postgresql://user:password@db:5432/traffic_violations_db
       PYTHONPATH: "/app"
     ports:
-      - "5002:5000"
+      - "5001:5000"
     command: flask run --host=0.0.0.0
 
 volumes:

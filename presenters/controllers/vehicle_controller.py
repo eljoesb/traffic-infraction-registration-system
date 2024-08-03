@@ -1,6 +1,5 @@
 from flask import Blueprint, request, jsonify
 from domain.entities.vehicle import Vehicle
-from domain.entities.person import Person
 from infrastructure.repositories.sqlalchemy_vehicle_repository import SQLAlchemyVehicleRepository
 from infrastructure.repositories.sqlalchemy_person_repository import SQLAlchemyPersonRepository
 from infrastructure.config.db_config import db
