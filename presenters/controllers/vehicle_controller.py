@@ -14,17 +14,25 @@ logging.basicConfig(level=logging.DEBUG)
 @vehicle_bp.route('/vehicle', methods=['POST'])
 def add_vehicle():
     data = request.get_json()
+    logging.debug(f"Received data: {data}")
     person = person_repository.get_by_email(data['email'])
     if person:
+        logging.debug(f"Found person: {person.name} with ID {person.id}")
         vehicle = Vehicle(
             license_plate=data['license_plate'],
             brand=data['brand'],
             color=data['color'],
             person_id=person.id
         )
-        vehicle_repository.add(vehicle)
-        logging.info(f"Vehicle added: {vehicle.license_plate}")
-        return jsonify({"message": "Vehicle added successfully"}), 201
+        try:
+            vehicle_repository.add(vehicle)
+            logging.info(f"Vehicle added: {vehicle.license_plate}")
+            return jsonify({"message": "Vehicle added successfully"}), 201
+        except Exception as e:
+            logging.error(f"Error adding vehicle: {e}")
+            return jsonify({"error": "Error adding vehicle"}), 500
+    else:
+        logging.debug("Person not found")
     return jsonify({"error": "Person not found"}), 404
 
 @vehicle_bp.route('/vehicle', methods=['GET'])
