@@ -13,8 +13,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
 
   app:
-    # image: codejonville/traffic-infraction-registration-system-api:latest
-    build: .
+    image: codejonville/traffic-infraction-registration-system-api:latest
     depends_on:
       - db
     environment:
@@ -26,8 +25,7 @@ services:
     command: flask run --host=0.0.0.0
 
   admin:
-    # image: codejonville/traffic-infraction-registration-system-admin:latest
-    build: .
+    image: codejonville/traffic-infraction-registration-system-admin:latest
     depends_on:
       - db
     environment:
