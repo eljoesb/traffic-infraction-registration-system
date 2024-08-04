@@ -7,6 +7,9 @@ from presenters.controllers.officer_controller import officer_bp
 from presenters.controllers.auth_controller import auth_bp
 from presenters.controllers.report_controller import report_bp
 
+from flasgger import Swagger
+
+
 app = Flask(__name__)
 init_db(app)
 app.config['DEBUG'] = True
@@ -18,6 +21,8 @@ app.register_blueprint(officer_bp, url_prefix='/api')
 app.register_blueprint(violation_bp, url_prefix='/api')
 app.register_blueprint(auth_bp, url_prefix='/api')
 app.register_blueprint(report_bp, url_prefix='/api')
+
+swagger = Swagger(app, template_file='../swagger.yaml')
 
 
 if __name__ == '__main__':

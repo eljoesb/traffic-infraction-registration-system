@@ -56,8 +56,12 @@ Este proyecto es un sistema de registro de infracciones de tránsito desarrollad
    ```
 
 3. La aplicación estará disponible en:
+
    - API: `http://localhost:5001`
    - Admin: `http://localhost:5002`
+
+4. Documentación estará disponible en:
+   - Docs: `http://localhost:5001/apidocs/`
 
 ### Publicación en Docker Hub
 
